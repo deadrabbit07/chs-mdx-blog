@@ -11,7 +11,7 @@ export default function Footer() {
           <a href='https://github.com/deadrabbit07' target='_blank' rel='noopener noreferrer' className='hover:text-white transition-colors duration-200'>
             <FaGithub size={24} />
           </a>
-          <a href='mailto:chsblog@example.com' className='hover:text-white transition-colors duration-200'>
+          <a href='mailto:eccha01@gmail.com' className='hover:text-white transition-colors duration-200'>
             <FaEnvelope size={24} />
           </a>
           <a href='https://deadrabbit07.github.io/web-portfolio-serve/' target='_blank' rel='noopener noreferrer' className='hover:text-white transition-colors duration-200'>
