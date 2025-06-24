@@ -1,0 +1,43 @@
+export const metadata = {
+  title: '웹 프론트엔드 핵심 개념 정리',
+  description: 'HTML, JavaScript, React 등 웹 개발에 필요한 핵심 개념들을 체계적으로 정리한 자료입니다.',
+  type: '정리 문서',
+};
+
+<div className="text-4xl font-bold mb-6 bg-indigo-600 text-white px-6 py-3 rounded">
+  웹 프론트엔드 핵심 개념 정리
+</div>
+
+---
+
+## 📘 HTML/CSS 기본 및 렌더링 메커니즘
+
+- HTML은 문서 구조 정의, CSS는 시각적 스타일 정의
+- 브라우저 렌더링 흐름:
+  1. HTML 파싱 → DOM 생성
+  2. CSS 파싱 → CSSOM 생성
+  3. Render Tree 생성
+  4. Layout (배치)
+  5. Paint (픽셀로 변환)
+  6. Composite (합성)
+
+> 리플로우/리페인트 최소화가 성능 최적화의 핵심입니다.
+
+---
+
+## 🧠 Closure / Scope / Hoisting
+
+- **스코프(Scope)**: 변수 접근 가능한 영역 (Lexical Scope 기반)
+- **호이스팅(Hoisting)**:
+  - `var`는 선언만 위로 끌어올림 (`undefined`)
+  - `let`, `const`는 TDZ(Temporal Dead Zone) 발생
+- **클로저(Closure)**: 함수가 외부 변수에 접근 가능한 구조
+
+```js
+function outer() {
+  let count = 0;
+  return function inner() {
+    count++;
+    return count;
+  };
+}
