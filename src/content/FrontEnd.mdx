@@ -41,3 +41,168 @@ function outer() {
     return count;
   };
 }
+```
+---
+## 🔄 Event Loop & Call Stack
+- 자바스크립트는 싱글 스레드지만, 이벤트 루프 + 큐로 비동기 처리
+- 구성 요소:
+1. Call Stack: 동기 코드 실행
+2. Microtask Queue: `Promise.then`, `queueMicrotask`
+3. Callback Queue: `setTimeout`, `DOM Events`
+> Microtask는 Callback보다 우선순위 높음
+
+---
+## 🔗 this 바인딩
+`this`는 함수 호출 방식에 따라 다르게 바인딩됨:
+
+- 일반 함수: `window` 또는 `undefined` (strict mode)
+- 메서드: 해당 객체
+- `new`: 새 인스턴스
+- `bind`, `call`, `apply`: 명시적 바인딩
+- 화살표 함수: 상위 스코프의 `this`를 렉시컬하게 사용
+
+---
+
+## ⏳ Promise / async-await / Microtask Queue
+- `Promise`: 비동기 작업의 상태/결과 표현
+- `async/await`: `Promise` 기반 문법적 설탕
+- `await`는 함수 실행을 멈추지 않고, 다음 작업을 Microtask Queue에 등록
+```js
+async function fetchData() {
+  const res = await fetch('/api');
+  const data = await res.json();
+  console.log(data);
+}
+```
+---
+## 📄 DOM 구조 및 조작 원리
+- HTML을 JS에서 제어하는 구조화된 객체 모델
+- 주요 API:
+1. 탐색: `getElementById`, `querySelector`
+2. 조작: `appendChild`, `removeChild`, `innerHTML`
+- DOM 변경은 느리기 때문에 Virtual DOM 같은 개념 등장 (React)
+---
+
+## 🌐 HTTP / HTTPS 및 RESTful API
+- HTTP: 비연결형/무상태 프로토콜, 요청-응답 기반
+- HTTPS: SSL/TLS 기반 암호화
+- REST:
+1. 자원(Resource)을 URI로 식별
+2. HTTP 메서드 사용 (GET, POST, PUT, DELETE)
+3. JSON 데이터 전송
+---
+
+## 🎨 브라우저 렌더링 과정
+- 렌더링 엔진의 단계:
+1. HTML 파싱 → DOM
+2. CSS 파싱 → CSSOM
+3. DOM + CSSOM → Render Tree
+4. Layout 계산
+5. Paint → GPU 처리
+6. Composite → 화면 출력
+---
+
+## 🛠️ 웹팩, 바벨 등 빌드 도구
+- Webpack: 모듈 단위로 JS/CSS/이미지 등 번들링
+- Babel: 최신 JS 문법을 구형 브라우저 호환 가능하게 변환
+- 설정 파일:
+1. `webpack.config.js`
+2. `.babelrc` 또는 `babel.config.js`
+---
+
+## 🌱 상태 관리 원리 (Redux, Context API)
+**Context API**
+
+- 전역 상태를 하위 컴포넌트에 제공
+- Provider를 통해 전달, 리렌더링 주의
+
+**Redux**
+
+- 단일 Store, Reducer 기반 상태 관리
+- `dispatch(action)` → `reducer(state, action)` → 새로운 상태
+- 비동기 처리는 `redux-thunk`, `redux-saga` 등 미들웨어 활용
+---
+## 🌍 CSR / SSR / SSG 차이점 비교
+
+<div className="overflow-x-auto my-4">
+  <table className="min-w-full table-auto border border-gray-300 text-sm">
+    <thead>
+      <tr className="bg-gray-100">
+        <th className="px-4 py-2 border">렌더링 방식</th>
+        <th className="px-4 py-2 border">설명</th>
+        <th className="px-4 py-2 border">장점</th>
+        <th className="px-4 py-2 border">단점</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td className="px-4 py-2 border">CSR</td>
+        <td className="px-4 py-2 border">클라이언트에서 렌더링</td>
+        <td className="px-4 py-2 border">상호작용 빠름</td>
+        <td className="px-4 py-2 border">초기 로딩 느림, SEO 약함</td>
+      </tr>
+      <tr>
+        <td className="px-4 py-2 border">SSR</td>
+        <td className="px-4 py-2 border">서버에서 HTML 생성 후 전달</td>
+        <td className="px-4 py-2 border">초기 렌더 속도 빠름</td>
+        <td className="px-4 py-2 border">서버 부하 가능성</td>
+      </tr>
+      <tr>
+        <td className="px-4 py-2 border">SSG</td>
+        <td className="px-4 py-2 border">정적 HTML 미리 생성 (빌드 시)</td>
+        <td className="px-4 py-2 border">빠름, 캐싱 가능</td>
+        <td className="px-4 py-2 border">변경 시 다시 빌드 필요</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+---
+
+## 🧷 이벤트 버블링 & 캡처링
+- 버블링: 이벤트가 하위 → 상위로 전파 (기본)
+- 캡처링: 상위 → 하위로 전파 (`addEventListener(..., ..., true)`)
+```js
+element.addEventListener('click', handler, true); 
+element.addEventListener('click', handler); 
+```
+> 이벤트 위임에 활용 가능
+---
+
+## 🔐 CORS 정책 개념
+- **Cross-Origin Resource Sharing**
+- 다른 Origin의 리소스를 브라우저가 제한
+- 서버에서 헤더 설정 필요:
+```js
+Access-Control-Allow-Origin: *
+```
+---
+
+## 📦 자바스크립트 실행 컨텍스트
+- JS는 코드를 실행할 때 Execution Context를 생성
+- 구성요소:
+1. VariableEnvironment
+2. LexicalEnvironment
+3. `this` 바인딩
+
+> 스코프 체인을 따라 변수 탐색
+
+---
+## ⚙️ 병렬 처리 방식 (Web API 활용)
+- 자바스크립트는 싱글 스레드
+- Web API (setTimeout, fetch 등) + 이벤트 루프 활용
+- 비동기 작업을 **병렬적으로 처리하는 구조** 흉내
+
+---
+
+## ⚛️ React 상태 불변성
+- 상태를 직접 변경하지 않고 복사하여 새로운 상태로 교체
+- 변경 감지를 위해 **불변성(immutability)** 유지 필요
+
+```js
+setState(prev => [...prev, newItem]); 
+```
+
+> 불변성을 유지하면 성능 최적화 및 예측 가능성이 높아짐
+
+
